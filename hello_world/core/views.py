@@ -1,7 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import HttpResponse
+
 
 def index(request):
-    context = {
-        "title": "Django example",
-    }
-    return render(request, "index.html", context)
+    request.session["test"] = "test"
+    return HttpResponse("Hello, world. You're at the polls index.")
