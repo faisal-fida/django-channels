@@ -7,6 +7,15 @@ load_dotenv()
 # Daphne is a HTTP, HTTP2 and WebSocket protocol server for ASGI and ASGI-HTTP.
 ASGI_APPLICATION = "hello_world.asgi.application"
 
+# Channel layers allow you to talk between different instances of an application.
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
