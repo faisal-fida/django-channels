@@ -1,10 +1,14 @@
 from django.shortcuts import render
+from .models import Room, Message
 
 
 # Create your views here.
 def index(request):
-    return render(request, "chat/index.html", {})
+    rooms = Room.objects.all()
+    return render(request, "chat/index.html", {"rooms": rooms})
 
 
-def room(request, room_name):
-    return render(request, "chat/room.html", {"room_name": room_name})
+def room(request, room_slug):
+    room = Room.objects.get(slug=room_slug)
+    messages = Message.objects.filter(room=room)
+    return render(request, "chat/room.html", {"room": room, "messages": messages})
